@@ -36,8 +36,6 @@ public class SigStatsGui extends JFrame implements Observer {
     private List<SigGame> sgl = null;
     private SigStatistic ss = new SigStatistic();
     private JProgressBar pg;
-    private int val = 0;
-    private int max = 1;
     private JTextField t_id;
     private JTextField t_first;
     private JTextField t_last;
@@ -767,20 +765,20 @@ public class SigStatsGui extends JFrame implements Observer {
             System.out.println("GUI.update.try: " + sgl.get(0).getHero());
             showStatistic();
         } catch (ClassCastException ex) {
-            this.val = ((int[]) arg)[0];
-            this.max = ((int[]) arg)[1];
-            if (this.val == -2) {
+            int val = ((int[]) arg)[0];
+            int max = ((int[]) arg)[1];
+            if (val == -2) {
                 t_id.setText("No Connection");
                 busy(false);
-                this.val = 0;
+                val = 0;
             }
-            if (this.val == -3) {
+            if (val == -3) {
                 t_id.setText("No Games");
                 busy(false);
-                this.val = 0;
+                val = 0;
             }
             System.out.println("GUI.update.catch: " + ((int[]) arg)[0] + " " + ((int[]) arg)[1] + " ex: " + ex);
-            setProgress(this.val, this.max);
+            setProgress(val, max);
         } catch (Throwable ex) {
             System.out.println("GUI.update.catch: ex: " + ex);
             busy(false);

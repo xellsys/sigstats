@@ -126,8 +126,7 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
                 }
             }
             //find first date
-            for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-                SigGame sg = i.next();
+            for (SigGame sg : sgl) {
                 if (sg.getStartTime().getTime().before(firstDate.getTime())) {
                     finish = true;
                     firstGame = sgl.indexOf(sg);
@@ -164,8 +163,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesBetweenDates(List<SigGame> sgl, Calendar firstDate, Calendar lastDate) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getStartTime().getTimeInMillis() > firstDate.getTimeInMillis()
                     && sg.getStartTime().getTimeInMillis() < lastDate.getTimeInMillis()) {
                 subsgl.add(sg);
@@ -177,8 +176,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesDate(List<SigGame> sgl, Calendar day) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getStartTime().get(Calendar.DAY_OF_YEAR) == day.get(Calendar.DAY_OF_YEAR)
                     && sg.getStartTime().get(Calendar.YEAR) == day.get(Calendar.YEAR)) {
                 subsgl.add(sg);
@@ -190,8 +189,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesMonth(List<SigGame> sgl, int month, int year) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getStartTime().get(Calendar.YEAR) == year
                     && sg.getStartTime().get(Calendar.MONTH) == month) {
                 subsgl.add(sg);
@@ -203,8 +202,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesYear(List<SigGame> sgl, int year) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getStartTime().get(Calendar.YEAR) == year) {
                 subsgl.add(sg);
 
@@ -216,8 +215,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesDZ(List<SigGame> sgl) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.isDZ()) {
                 subsgl.add(sg);
 
@@ -229,8 +228,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesBnet(List<SigGame> sgl) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (!sg.isDZ()) {
                 subsgl.add(sg);
             }
@@ -241,8 +240,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesHero(List<SigGame> sgl, String hero) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getHero().equals(hero)) {
                 subsgl.add(sg);
             }
@@ -253,8 +252,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesMode(List<SigGame> sgl, String mode) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getMode().equals(mode)) {
                 subsgl.add(sg);
             }
@@ -265,8 +264,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesMinLevel(List<SigGame> sgl, int level) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getLevel() >= level) {
                 subsgl.add(sg);
             }
@@ -277,8 +276,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesMaxLevel(List<SigGame> sgl, int level) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getLevel() <= level) {
                 subsgl.add(sg);
             }
@@ -289,8 +288,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesVIP(List<SigGame> sgl) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getGameType().equals(GameType.vip)) {
                 subsgl.add(sg);
             }
@@ -301,8 +300,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesValid(List<SigGame> sgl) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (!sg.getGameResult().equals(GameResult.close)) {
                 subsgl.add(sg);
 
@@ -314,8 +313,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> subGamesSIG(List<SigGame> sgl) {
         ArrayList<SigGame> subsgl = new ArrayList<SigGame>();
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getGameType().equals(GameType.sig)) {
                 subsgl.add(sg);
 
@@ -363,8 +362,8 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
 
     public SigGame getGameByDate(List<SigGame> sgl, Calendar date) {
         SigGame sg;
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext(); ) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             if (sg.getStartTime() == date) {
                 return sg;
             }

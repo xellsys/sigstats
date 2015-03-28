@@ -16,12 +16,9 @@ import java.awt.event.ActionListener;
  */
 public class SigFilterGui extends JFrame {
 
-    private JPanel panel;
     private JTextField t_num;
     private JTextField t_hero;
     private JTextField t_mode;
-    private JButton b_disc;
-    private JButton b_apply;
     private JCheckBox b_dz;
     private JCheckBox b_val;
     private JComboBox c_sigvip;
@@ -42,7 +39,7 @@ public class SigFilterGui extends JFrame {
 
     private void initUI() {
 
-        panel = new JPanel();
+        JPanel panel = new JPanel();
 
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         panel.setLayout(new GridLayout(9, 2, 10, 10));
@@ -92,10 +89,10 @@ public class SigFilterGui extends JFrame {
         c_maxlvl.setSelectedIndex(24);
         panel.add(c_maxlvl);
 
-        b_disc = new JButton("Discard");
+        JButton b_disc = new JButton("Discard");
         panel.add(b_disc);
 
-        b_apply = new JButton("Apply");
+        JButton b_apply = new JButton("Apply");
         panel.add(b_apply);
 
         b_apply.addActionListener(new ActionListener() {
@@ -133,11 +130,11 @@ public class SigFilterGui extends JFrame {
         //Level
         try {
             SigFilter.minLvl = Integer.parseInt((String) c_minlvl.getSelectedItem());
-        } catch (NumberFormatException numberFormatException) {
+        } catch (NumberFormatException ignored) {
         }
         try {
             SigFilter.maxLvl = Integer.parseInt((String) c_maxlvl.getSelectedItem());
-        } catch (NumberFormatException numberFormatException) {
+        } catch (NumberFormatException ignored) {
         }
         //Hero
         SigFilter.onlyHero = t_hero.getText();
@@ -150,15 +147,14 @@ public class SigFilterGui extends JFrame {
         //Last Games
         try {
             SigFilter.num = Integer.parseInt(t_num.getText());
-        } catch (NumberFormatException numberFormatException) {
+        } catch (NumberFormatException ignored) {
         }
         //rdy
         SigFilter.rdy = true;
     }
 
     private JLabel newLabel(String s) {
-        JLabel lab = new JLabel(s);
-        return lab;
+        return new JLabel(s);
     }
 
     private JButton newJButton(String s) {

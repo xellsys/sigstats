@@ -33,11 +33,7 @@ public class SigStatsWebDAL extends Observable {
 
     public boolean checkWeb() throws IOException {
         //TODO: exakten String herausfinden der nur bei Maintenance zu finden ist
-        if (Jsoup.connect("http://www.dota-league.com/index.php?section=news").timeout(timeout).get().text().contains("Maintenance")) {
-            return false;
-        } else {
-            return true;
-        }
+        return !Jsoup.connect("http://www.dota-league.com/index.php?section=news").timeout(timeout).get().text().contains("Maintenance");
     }
 
     public List<SigGame> loadAllGames(int id) throws Throwable {
