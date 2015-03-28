@@ -139,8 +139,8 @@ public class SigStatistic {
         SigGame sg;
         this.init();
         this.firstGameDate = this.lastGameDate = sgl.get(0).getStartTime();
-        for (Iterator<SigGame> i = sgl.iterator(); i.hasNext();) {
-            sg = i.next();
+        for (SigGame aSgl : sgl) {
+            sg = aSgl;
             //set dates
             this.firstGameDate = sg.getStartTime().getTimeInMillis()
                     < this.getFirstGameDate().getTimeInMillis() ? sg.getStartTime() : this.getFirstGameDate();

@@ -8,16 +8,15 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
- *
  * @author xellsys
  */
-public class SigGame implements Serializable{
+public class SigGame implements Serializable {
 
     // <editor-fold defaultstate="collapsed" desc="Constructors">
     public SigGame() {
         init();
     }
-    
+
     public SigGame(String hero) {
         this.hero = hero;
     }
@@ -53,6 +52,7 @@ public class SigGame implements Serializable{
         out.append("Stats: " + getKills() + "/" + getDeaths() + "/" + getAssists() + "\n");
         out.append(isActive() ? "Active" : "Closed\n\n");
     }
+
     // <editor-fold defaultstate="collapsed" desc="Class variables">
     //private dota_hero hero;
     private String hero;
@@ -71,6 +71,7 @@ public class SigGame implements Serializable{
     private GregorianCalendar endTime;
     private boolean active;
     private DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Getter">
     public String getHero() {
@@ -115,7 +116,7 @@ public class SigGame implements Serializable{
 
     public boolean isDZ() {
         return this.isDZ;
-}
+    }
 
     public String getMode() {
         return mode;
@@ -132,6 +133,7 @@ public class SigGame implements Serializable{
     public boolean isActive() {
         return active;
     }
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Setter">
     public void setClosed() {
@@ -162,6 +164,10 @@ public class SigGame implements Serializable{
         this.assists = inAssists;
     }
 
+    public void setGameResult(String inState) {
+        setGameResult(GameResult.valueOf(inState));
+    }
+
     public void setGameResult(GameResult inState) {
         this.gameResult = inState;
         switch (inState) {
@@ -181,6 +187,10 @@ public class SigGame implements Serializable{
         }
     }
 
+    public void setGameType(String inType) {
+        setGameType(GameType.valueOf(inType));
+    }
+
     public void setGameType(GameType inType) {
         this.gameType = inType;
         if (inType == GameType.vip) {
@@ -198,9 +208,13 @@ public class SigGame implements Serializable{
         this.mode = inMode;
     }
 
+    public void setStart(GregorianCalendar inCal) {
+        startTime = inCal;
+    }
+
     public void setStart(String inStart) {
         startTime.set(Integer.parseInt(inStart.substring(6, 10)),
-                Integer.parseInt(inStart.substring(3, 5))-1,
+                Integer.parseInt(inStart.substring(3, 5)) - 1,
                 Integer.parseInt(inStart.substring(0, 2)),
                 Integer.parseInt(inStart.substring(11, 13)),
                 Integer.parseInt(inStart.substring(14, 16)));

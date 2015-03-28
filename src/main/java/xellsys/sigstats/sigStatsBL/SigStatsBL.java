@@ -6,11 +6,7 @@ import xellsys.sigstats.sharedEntities.SigGame;
 import xellsys.sigstats.sharedEntities.SigMisc;
 import xellsys.sigstats.sigStatsDAL.SigStatsWebDAL;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -335,7 +331,42 @@ public class SigStatsBL extends Observable implements Observer, Runnable {
     public List<SigGame> loadGamesLocally(int userid) throws Throwable {
         FileInputStream fis = new FileInputStream("sig." + userid + ".ser");
         ObjectInputStream in = new ObjectInputStream(fis);
-        return (List<SigGame>) in.readObject();
+        List<SigGame> ret = null;
+        try {
+            ret = (List<SigGame>) in.readObject();
+            ret.get(0).getAssists();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (ClassCastException ex) {
+            ret = new ArrayList<SigGame>();
+            fis.close();
+            fis = new FileInputStream("sig." + userid + ".ser");
+            ObjectInputStream inn = new ObjectInputStream(fis);
+            List<SharedEntities.SigGame> objj = (List<SharedEntities.SigGame>) inn.readObject();
+            for (SharedEntities.SigGame i : objj) {
+                ret.add(mapSigGame(i));
+            }
+        }
+        return ret;
+    }
+
+    private SigGame mapSigGame(SharedEntities.SigGame input) {
+        SigGame out = new SigGame(input.getHero());
+        out.setAssists(input.getAssists());
+        out.setActive(input.isActive());
+        out.setDeaths(input.getDeaths());
+        out.setDZ(input.isDZ());
+        out.setGameResult(input.getGameResult().toString());
+        out.setGameType(input.getGameType().toString());
+        out.setHero(input.getHero());
+        out.setKills(input.getKills());
+        out.setLength(input.getLength());
+        out.setLevel(input.getLevel());
+        out.setMode(input.getMode());
+        out.setStart(input.getStartTime());
+        return out;
     }
 
     public List<SigGame> updateList(List<SigGame> sgl, int userid) throws Throwable {

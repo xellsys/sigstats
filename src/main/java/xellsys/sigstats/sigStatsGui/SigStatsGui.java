@@ -22,6 +22,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -544,9 +546,20 @@ public class SigStatsGui extends JFrame implements Observer {
         try {
             this.sgl = BL.loadGamesLocally(id);
             showStatistic();
-        } catch (Throwable ex) {
+        } catch (IOException ex) {
+            ex.printStackTrace();
             System.out.println("no local data");
             t_id.setText("No local data");
+            busy(false);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+            System.out.println("incompatible data");
+            t_id.setText("incompatible data");
+            busy(false);
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+            System.out.println("unknown error");
+            t_id.setText("unknown error");
             busy(false);
         }
         busy(false);
